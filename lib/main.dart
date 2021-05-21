@@ -20,8 +20,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    String tapToStarTitle = 'Waiting start scanner';
-    String title = 'Web Scanner';
+    String title = 'Test access to the camera';
     return MaterialApp(
       debugShowMaterialGrid: false,
       debugShowCheckedModeBanner: false,
@@ -35,26 +34,11 @@ class _MyAppState extends State<MyApp> {
         body: Container(
           child: Column(
             children: [
-              Expanded(
-                child: Container(
-                  color: Colors.black,
-                  child: CamCodeScanner(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    refreshDelayMillis: 800,
-                    onBarcodeResult: (barcode) {
-                      setState(() {
-                        tapToStarTitle = barcode.toString();
-                      });
-                    },
-                  ),
-                ),
-              ),
-              Container(
-                height: 50,
-                child: Center(
-                  child: Text(tapToStarTitle),
-                ),
+              CamCodeScanner(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                refreshDelayMillis: 800,
+                onBarcodeResult: (barcode) {},
               ),
             ],
           ),
