@@ -18,39 +18,43 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String barcodeValue = 'Press button to scan a barcode';
-
   @override
   Widget build(BuildContext context) {
-    barcodeValue = ModalRoute.of(context)?.settings?.arguments as String ??
-        'Press button to scan a barcode';
+    String tapToStarTitle = 'Waiting start scanner';
+    String title = 'Web Scanner';
     return MaterialApp(
-      home: Scaffold(
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.scanner),
-          onPressed: () => openScanner(context),
-        ),
-        appBar: AppBar(
-          title: const Text('CamCode example app'),
-        ),
-        body: Center(
-          child: Text(barcodeValue),
-        ),
+      debugShowMaterialGrid: false,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.green,
       ),
-    );
-  }
-
-  void openScanner(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => CamCodeScanner(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        refreshDelayMillis: 800,
-        onBarcodeResult: (barcode) {
-          Navigator.of(context).pushNamed('/', arguments: barcode);
-        },
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('$title'),
+        ),
+        body: Container(
+          child: Column(
+            children: [
+              Expanded(
+                child: Container(
+                  color: Colors.black,
+                  child: CamCodeScanner(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    refreshDelayMillis: 800,
+                    onBarcodeResult: (barcode) {},
+                  ),
+                ),
+              ),
+              Container(
+                height: 50,
+                child: Center(
+                  child: Text(tapToStarTitle),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
