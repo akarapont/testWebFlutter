@@ -42,7 +42,11 @@ class _MyAppState extends State<MyApp> {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height,
                     refreshDelayMillis: 800,
-                    onBarcodeResult: (barcode) {},
+                    onBarcodeResult: (barcode) {
+                      setState(() {
+                        tapToStarTitle = barcode.toString();
+                      });
+                    },
                   ),
                 ),
               ),
